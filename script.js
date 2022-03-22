@@ -1,12 +1,4 @@
 // Funções de criação
-function createPharagraphOperation() {
-    let parent = document.getElementById("funcionamento");
-    let child = document.createElement("p");
-    child.innerHTML = "<br>Clique duas vezes em um item para marcá-lo como completo";
-    child.style.textAlign = "center";
-    parent.appendChild(child);
-}
-createPharagraphOperation();
 function createInputTask() {
     let parent = document.getElementById("insertTask");
     let child = document.createElement("input");
@@ -114,7 +106,8 @@ btnEraseCompletedItems.addEventListener("click", eraseCompletedItems);
 btnSaveList.addEventListener("click", saveListInLocalStorage);
 btnChildUp.addEventListener("click", moveUp);
 btnChildDown.addEventListener("click", moveDown);
-btnRmvSelectedItem.addEventListener("click", removeSelectedItem)
+btnRmvSelectedItem.addEventListener("click", removeSelectedItem);
+inputTask.addEventListener("keyup", getKey);
 function addTask() {
     let parent = document.getElementById("lista-tarefas");
     let newItem = document.createElement("li");
@@ -123,6 +116,12 @@ function addTask() {
     inputTask.value = "";
     newItem.addEventListener("click", alterBackgroundColorListItem);
     newItem.addEventListener("dblclick", riskListItem);
+}
+function getKey(event) {
+    let key = event.key;
+    if (key === "Enter") {
+        addTask();
+    }
 }
 function alterBackgroundColorListItem(event) {
     let listItems = document.getElementsByTagName("li");
