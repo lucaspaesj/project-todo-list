@@ -1,1 +1,1 @@
-# project-todo-list
+O presente projeto trata-se de um site desenvolvido durante o curso da Trybe, no qual podemos estruturar uma lista de tarefas, que por sua vez possui diversos botões interativos que modificam a referida lista.
