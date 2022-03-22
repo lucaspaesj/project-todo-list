@@ -1,0 +1,35 @@
+*{margin: 0; padding: 0;}
+
+body{
+    background-color: #FC766AFF;
+}
+
+main{
+    width: 75%;
+    height: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    border: 1px solid black;
+    background-color: #5B84B1FF;
+}
+
+h1{
+    text-align: center;
+}
+
+#taskList{
+    width: 70%;
+    margin: auto;
+    /* Referência para próxima linha: https://stackoverflow.com/questions/28977320/how-do-i-get-the-bullet-points-of-a-ul-to-center-with-the-text */
+    list-style-position: inside;
+}
+
+#taskList li{
+    text-align: center;
+}
+
+.completed {
+    text-decoration: line-through;
+}
