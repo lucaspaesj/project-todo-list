@@ -5,7 +5,7 @@ function createInputTask() {
     child.id = "texto-tarefa";
     child.placeholder = "Item à adicionar";
     child.style.width = "350px";
-    child.style.marginLeft = "30px"
+    child.style.marginLeft = "160px"
     child.style.float = "left";
     child.style.display = "inline";
     parent.appendChild(child);
@@ -24,7 +24,7 @@ function createBtnTask() {
     child.id = "criar-tarefa";
     child.innerText = "Adicionar tarefa";
     child.style.width = "350px";
-    child.style.marginRight = "30px"
+    child.style.marginRight = "160px"
     child.style.float = "right";
     child.style.display = "inline-block";
     parent.appendChild(child);
@@ -36,7 +36,7 @@ function createBtnEraseAll() {
     child.id = "apaga-tudo";
     child.innerText = "Apagar lista";
     child.style.display = "inline"
-    child.style.marginLeft = "30px";
+    child.style.marginLeft = "160px";
     parent.appendChild(child);
 }
 createBtnEraseAll();
@@ -90,6 +90,24 @@ function createBtnRemoveSelectedItem() {
     parent.appendChild(child)
 }
 createBtnRemoveSelectedItem();
+function createBtnClass() {
+    let btns = document.querySelectorAll("button");
+    for (let i = 0; i < btns.length; i += 1) {
+        btns[i].className = "button";
+    }
+}
+createBtnClass();
+function createBorderRadiusOl() {
+    let ol = document.querySelector("ol");
+    if(ol.firstChild === null){
+        ol.style.border = "";
+        ol.style.borderRadius = "";
+    }
+    else{
+        ol.style.border = "1px solid black";
+        ol.style.borderRadius = "50px";
+    }
+}
 // Variáveis
 let btnAddTask = document.getElementById("criar-tarefa");
 let inputTask = document.getElementById("texto-tarefa");
@@ -109,13 +127,19 @@ btnChildDown.addEventListener("click", moveDown);
 btnRmvSelectedItem.addEventListener("click", removeSelectedItem);
 inputTask.addEventListener("keyup", getKey);
 function addTask() {
-    let parent = document.getElementById("lista-tarefas");
-    let newItem = document.createElement("li");
-    newItem.innerText = inputTask.value;
-    parent.appendChild(newItem);
-    inputTask.value = "";
-    newItem.addEventListener("click", alterBackgroundColorListItem);
-    newItem.addEventListener("dblclick", riskListItem);
+    if (inputTask.value === "") {
+        alert("É preciso adicionar um valor em sua tarefa!")
+    }
+    else {
+        let parent = document.getElementById("lista-tarefas");
+        let newItem = document.createElement("li");
+        newItem.innerText = inputTask.value;
+        parent.appendChild(newItem);
+        inputTask.value = "";
+        newItem.addEventListener("click", alterBackgroundColorListItem);
+        newItem.addEventListener("dblclick", riskListItem);
+        createBorderRadiusOl();
+    }
 }
 function getKey(event) {
     let key = event.key;
@@ -127,9 +151,11 @@ function alterBackgroundColorListItem(event) {
     let listItems = document.getElementsByTagName("li");
     if (event.target.style.backgroundColor === "gray") {
         event.target.style.backgroundColor = "transparent";
+        event.target.style.borderRadius = "30px";
     }
     else {
         event.target.style.backgroundColor = "gray";
+        event.target.style.borderRadius = "30px";
         for (let i = 0; i < listItems.length; i += 1) {
             if (listItems[i] === event.target) {
             }
@@ -154,12 +180,14 @@ function eraseAllItems() {
     for (let i = 0; i < items.length; i += 1) {
         items[i].parentNode.removeChild(items[i]);
     }
+    createBorderRadiusOl();
 }
 function eraseCompletedItems() {
     let completedItems = document.querySelectorAll(".completed");
     for (let i = 0; i < completedItems.length; i += 1) {
         completedItems[i].parentNode.removeChild(completedItems[i]);
     }
+    createBorderRadiusOl();
 }
 function saveListInLocalStorage() {
     let items = document.querySelectorAll("li");
@@ -176,6 +204,7 @@ function saveListInLocalStorage() {
         let value = items[i].style.backgroundColor;
         localStorage.setItem(`${i + 1}ºItemBackgroundColor`, value);
     }
+    alert("Lista salva com sucesso!")
 }
 function moveUp() {
     let childs = document.querySelectorAll("li");
@@ -205,8 +234,8 @@ function moveDown() {
 }
 function removeSelectedItem() {
     let items = document.querySelectorAll("li");
-    for(let i = 0; i < items.length; i += 1){
-        if(items[i].style.backgroundColor === "gray"){
+    for (let i = 0; i < items.length; i += 1) {
+        if (items[i].style.backgroundColor === "gray") {
             items[i].parentNode.removeChild(items[i]);
         }
     }
@@ -249,4 +278,5 @@ window.onload = function () {
             child.addEventListener("dblclick", riskListItem);
         }
     }
+    createBorderRadiusOl();
 }
